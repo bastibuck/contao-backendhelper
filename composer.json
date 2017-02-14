@@ -1,0 +1,22 @@
+{
+    "name": "bastibuck/contao-backendhelper",
+    "type": "contao-bundle",
+    "description": "Contao Open Source CMS extension Backend Helper",
+    "keywords": ["contao", "backend", "helper", "backendhelper"],
+    "license": "LGPL-3.0+",
+    "authors":[
+        {
+            "name":"Sebastian Buck",
+            "homepage":"http://www.bastibuck.de"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "contao/core-bundle": "~4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bastibuck\\BackendHelper\\": "src"
+        }
+    }
+}
