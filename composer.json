@@ -18,5 +18,12 @@
         "psr-4": {
             "Bastibuck\\BackendHelper\\": ""
         }
-    }
+    },
+  	"extra":{
+  		"contao":{
+  			"sources":{
+  				"":"system/modules/contao-backendhelper"
+  			}
+  		}
+  	}
 }
