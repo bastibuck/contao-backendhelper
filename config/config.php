@@ -10,3 +10,6 @@
 
 // add icon to install tool link in BE
 $GLOBALS['TL_CSS'][] = "bundles/backendhelper/be_helper_icon.css";
+
+
+echo "jo";
