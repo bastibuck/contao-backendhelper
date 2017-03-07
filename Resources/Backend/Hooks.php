@@ -48,7 +48,6 @@ class Hooks {
             $strContent = str_replace($strFind, $strFind.$strHTML, $strContent);
           }
         }
-
       }
 
       return $strContent;

@@ -6,3 +6,11 @@
   background: url("icon-install-tool.svg") left center no-repeat;
   background-size: 18px;
 }
+
+.header_install {
+  background: url("../../../themes/flexible/images/modules.gif");
+  padding: 2px 0 3px 20px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  margin-left: 15px;
+}

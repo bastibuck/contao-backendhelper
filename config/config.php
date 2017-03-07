@@ -10,4 +10,8 @@
 
 // Add quicklink to install-tool
 $GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Bastibuck\BackendHelper\Resources\Backend\Hooks', 'addInstallToolLink');
-$GLOBALS['TL_CSS'][] = "bundles/backendhelper/be_helper_icon.css";
+
+if (TL_MODE == 'BE') {
+  $GLOBALS['TL_CSS'][] = "bundles/backendhelper/be_helper_icon.css";
+  $GLOBALS['TL_CSS'][] = "system/modules/contao-backendhelper/assets/be_helper_icon.css";
+}
