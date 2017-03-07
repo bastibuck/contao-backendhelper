@@ -8,8 +8,6 @@
  */
 
 
-// add icon to install tool link in BE
+// Add quicklink to install-tool
+$GLOBALS['TL_HOOKS']['parseBackendTemplate'][] = array('\Bastibuck\BackendHelper\Resources\Backend\Hooks', 'addInstallToolLink');
 $GLOBALS['TL_CSS'][] = "bundles/backendhelper/be_helper_icon.css";
-
-
-echo "jo";
