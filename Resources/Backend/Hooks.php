@@ -24,9 +24,8 @@ class Hooks {
       {
         $objUser = BackendUser::getInstance();
 
-
         // check if quicklink should be used
-        if ($objUser->useQuickLink || $objUser->isAdmin) {
+        if ($objUser->useQuickLink) {
 
           // Build
           $strLinkText = $GLOBALS['TL_LANG']['MSC']['quick_installtool']['text'];
