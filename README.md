@@ -2,8 +2,6 @@
 
 Tiny extension for Contao CMS (3.5 or ^4.1) that provides several useful backend helpers.
 
----
-
 ## Usage
 Each feature can be activated in the user settings.
 
@@ -17,9 +15,8 @@ If you have any ideas that you want to be added let me know.
 **Possible features to be added**
 * Show where modules are used
 
----
 
-### Show IDs - supported types
+## Show IDs - supported types
 * tl_article,
 * tl_content,
 * tl_news_archive,
