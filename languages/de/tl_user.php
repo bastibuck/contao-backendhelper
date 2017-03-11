@@ -10,3 +10,4 @@
 
 // Fields
 $GLOBALS['TL_LANG']['tl_user']['useQuickLink'] = array('QuickLink zum Install-Tool', 'Aktivieren Sie den Quick-Link zum Install-Tool in der Header-Bar des Backends.');
+$GLOBALS['TL_LANG']['tl_user']['showListingIDs'] = array('Zeige IDs in Listenansicht', 'Aktiviert die Ausgabe von IDs in Listenansichten für die ausgewählten Bereiche.');

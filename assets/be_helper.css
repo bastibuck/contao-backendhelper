@@ -14,3 +14,10 @@
   background-repeat: no-repeat;
   margin-left: 15px;
 }
+
+.be_ID_container {
+  float: right;
+  color: #999;
+  padding-left: 3px;
+  font-weight: 300 !important;
+}
