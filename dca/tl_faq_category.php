@@ -12,7 +12,7 @@
 $objUser = BackendUser::getInstance();
 
 // show ID for pages in listing
-if (in_array('tl_faq_category', $objUser->showListingIDs)) {
+if ($objUser->showListingIDs && ('tl_faq_category', $objUser->showListingIDs)) {
   $GLOBALS['TL_DCA']['tl_faq_category']['list']['label']['fields'][] = 'id';
   $GLOBALS['TL_DCA']['tl_faq_category']['list']['label']['format'] .= '<span class="be_ID_container">[ID: %s]</span>';
 }

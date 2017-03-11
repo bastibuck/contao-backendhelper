@@ -12,7 +12,7 @@
 $objUser = BackendUser::getInstance();
 
 // show ID for pages in listing
-if (in_array('tl_faq', $objUser->showListingIDs)) {
+if ($objUser->showListingIDs && ('tl_faq', $objUser->showListingIDs)) {
   // manipulate listing to show ID
   $GLOBALS['TL_DCA']['tl_faq']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\ShowIDs', 'listQuestionsWithID');
 }

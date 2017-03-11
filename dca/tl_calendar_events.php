@@ -12,7 +12,7 @@
 $objUser = BackendUser::getInstance();
 
 // show ID for pages in listing
-if (in_array('tl_calendar_events', $objUser->showListingIDs)) {
+if ($objUser->showListingIDs && ('tl_calendar_events', $objUser->showListingIDs)) {
   // manipulate listing to show ID
   $GLOBALS['TL_DCA']['tl_calendar_events']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\ShowIDs', 'listEventsWithID');
 }

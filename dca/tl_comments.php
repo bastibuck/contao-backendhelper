@@ -12,7 +12,7 @@
 $objUser = BackendUser::getInstance();
 
 // show ID for pages in listing
-if (in_array('tl_comments', $objUser->showListingIDs)) {
+if ($objUser->showListingIDs && ('tl_comments', $objUser->showListingIDs)) {
   // manipulate listing to show ID
   $GLOBALS['TL_DCA']['tl_comments']['list']['label']['label_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\ShowIDs', 'listCommentsWithID');
 }
