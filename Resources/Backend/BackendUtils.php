@@ -13,6 +13,9 @@ namespace Bastibuck\BackendHelper\Resources\Backend;
 use Contao\Backend;
 use Contao\Input;
 use Contao\Database;
+use Contao\Environment;
+use Contao\Date;
+use Contao\Config;
 
 class BackendUtils extends Backend {
 
@@ -183,28 +186,35 @@ class BackendUtils extends Backend {
 
 
   /**
- 	 * Return all non-excluded fields of a record as HTML table
+ 	 * show where a given module is included
  	 *
  	 * @return string
  	 */
  	public function showUsage()
  	{
-    $arrRows = array();
-    $count = 0;
+    // init
+    $return = '';
+    $strParentChildSeparator = ' » ';
+    $backendPath = \Environment::get('url').'/contao';
 
-    // module ID
-    $id = Input::get('id');
+    // build info header
+    $id = Input::get('id'); // module ID
+    $arrInfoRow = array();
 
-    // get module
+    // get module data
     $objModule = Database::getInstance()
       ->prepare('SELECT * FROM tl_module WHERE id=?')
       ->execute($id);
 
-    $arrRows['type'] = $GLOBALS['TL_LANG']['FMD'][$objModule->type][0];
-    $arrRows['name'] = $objModule->name;
+    $arrInfoRow['type'] = $GLOBALS['TL_LANG']['FMD'][$objModule->type][0];
+    $arrInfoRow['name'] = $objModule->name;
 
-    foreach ($arrRows as $key => $value) {
 
+    $return .= '<div class="tl_show module_usage module_usage_header">
+                  <table class="tl_show">';
+
+    $count = 0;
+    foreach ($arrInfoRow as $key => $value) {
       // create colored rows
       $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
 
@@ -219,10 +229,157 @@ class BackendUtils extends Backend {
       </tr>';
     }
 
+    $return .= '</table></div>';
+
+
+    // look for includes in layouts
+    $objLayouts = Database::getInstance()
+      ->prepare('SELECT * FROM tl_layout')
+      ->execute();
+
+    while($objLayouts->next()) {
+      $arrModules = deserialize($objLayouts->modules);
+
+      foreach($arrModules as $module) {
+        if ($module['mod'] == $id) {
+          $arrIncluded['tl_layout'][] = '<a href="'.$backendPath.'?do=themes&table=tl_layout&id='.$objLayouts->id.'&act=edit&popup=1&rt='.REQUEST_TOKEN.'">'.$objLayouts->name.'</a>';
+        }
+      }
+    }
+
+    // look for includes in content elements
+    $objContent = Database::getInstance()
+      ->prepare('SELECT * FROM tl_content WHERE type=?')
+      ->execute('module');
+
+    while($objContent->next()) {
+      if($objContent->module == $id) {
+
+        switch ($objContent->ptable) {
+
+          // News
+          case 'tl_news':
+            $strDo = 'news';
+
+            // get parent news
+            $objNews = Database::getInstance()
+              ->prepare('SELECT * FROM '.$objContent->ptable.' WHERE id=?')
+              ->execute($objContent->pid);
+
+            // get parent news archive
+            $objNewsArchive = Database::getInstance()
+              ->prepare('SELECT * FROM tl_news_archive WHERE id=?')
+              ->execute($objNews->pid);
+
+            // build value string
+            $strParent = $objNewsArchive->title.$strParentChildSeparator;
+            $strValue = $objNews->headline.'<span style="color:#999;padding-left:3px">[' .Date::parse(Config::get('datimFormat'), $objNews->date) . ']';
+            break;
+
+          // Article
+          case 'tl_article':
+            $strDo = 'article';
+
+            // get parent article
+            $objArticle = Database::getInstance()
+              ->prepare('SELECT * FROM '.$objContent->ptable.' WHERE id=?')
+              ->execute($objContent->pid);
+
+            // get parent page
+            $objPage = Database::getInstance()
+              ->prepare('SELECT * FROM tl_page WHERE id=?')
+              ->execute($objArticle->pid);
+
+            // build value string
+            $strParent = $objPage->title.$strParentChildSeparator;
+            $strValue = $objArticle->title.'<span style="color:#999;padding-left:3px">['.$GLOBALS['TL_LANG']['COLS'][$objArticle->inColumn].']</span>';
+
+            break;
+
+          // Calendar
+          case 'tl_calendar_events':
+            $strDo = 'calendar';
+
+            // get parent event
+            $objEvent = Database::getInstance()
+              ->prepare('SELECT * FROM '.$objContent->ptable.' WHERE id=?')
+              ->execute($objContent->pid);
+
+            // get parent calendar
+            $objCalendar = Database::getInstance()
+              ->prepare('SELECT * FROM tl_calendar WHERE id=?')
+              ->execute($objEvent->pid);
+
+            // build value string
+            $strParent = $objCalendar->title.$strParentChildSeparator;
+            $strValue = $objEvent->title.'<span style="color:#999;padding-left:3px">[' .Date::parse(Config::get('datimFormat'), $objEvent->date) . ']';
+            break;
+        }
+
+
+
+        $arrIncluded[$objContent->ptable][] = $strParent.'<a href="'.$backendPath.'?do='.$strDo.'&table=tl_content&id='.$objContent->pid.'&popup=1&rt='. REQUEST_TOKEN.'">'.$strValue.'</a>';
+      }
+    }
+
+    // reorder array
+    $sortArray = array();
+    if($arrIncluded['tl_layout']) {
+      $sortArray[] = 'tl_layout';
+    }
+    if($arrIncluded['tl_article']) {
+      $sortArray[] = 'tl_article';
+    }
+    if($arrIncluded['tl_news']) {
+      $sortArray[] = 'tl_news';
+    }
+    if($arrIncluded['tl_calendar_events']) {
+      $sortArray[] = 'tl_calendar_events';
+    }
+    $arrIncluded = array_merge(array_flip($sortArray), $arrIncluded);
+
+    // build containers
+    foreach ($arrIncluded as $key => $arrElement) {
+
+      $strModName = str_replace('tl_', '', $key);
+      switch ($strModName) {
+        case 'article':
+        case 'news':
+          $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName][0];
+          break;
+
+        case 'calendar_events':
+          $strModName = $GLOBALS['TL_LANG']['MOD']['calendar'][0];
+          break;
+
+        case 'layout':
+          $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName];
+          break;
+
+        default:
+          # code...
+          break;
+      }
+
+      // headline
+      $return .= '<div class="tl_show module_usage module_usage_'.$key.'">
+      <h3>'.$strModName.'</h3><table class="tl_show">';
+
+      // rows
+      $count = 0;
+      foreach ($arrElement as $value) {
+        $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
+
+        $return .= '
+        <tr>
+          <td'.$class.'>'.$value.'</td>
+        </tr>';
+      }
+
+      $return .= '</table></div>';
+    }
+
     // return HTML table
-    return '
-      <table class="tl_show">
-        '.$return.'
-      </table>';
+    return $return;
   }
 }
