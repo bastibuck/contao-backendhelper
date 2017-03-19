@@ -242,7 +242,7 @@ class BackendUtils extends Backend {
 
       foreach($arrModules as $module) {
         if ($module['mod'] == $id) {
-          $arrIncluded['tl_layout'][] = '<a href="/contao/main.php?do=themes&table=tl_layout&id='.$objLayouts->id.'&act=edit&popup=1&rt='.REQUEST_TOKEN.'">'.$objLayouts->name.'</a>';
+          $arrIncluded['tl_layout'][] = '<a href="/contao?do=themes&table=tl_layout&id='.$objLayouts->id.'&act=edit&popup=1&rt='.REQUEST_TOKEN.'">'.$objLayouts->name.'</a>';
         }
       }
     }
