@@ -323,61 +323,70 @@ class BackendUtils extends Backend {
     }
 
     // reorder array
-    $sortArray = array();
-    if($arrIncluded['tl_layout']) {
-      $sortArray[] = 'tl_layout';
-    }
-    if($arrIncluded['tl_article']) {
-      $sortArray[] = 'tl_article';
-    }
-    if($arrIncluded['tl_news']) {
-      $sortArray[] = 'tl_news';
-    }
-    if($arrIncluded['tl_calendar_events']) {
-      $sortArray[] = 'tl_calendar_events';
-    }
-    $arrIncluded = array_merge(array_flip($sortArray), $arrIncluded);
-
-    // build containers
-    foreach ($arrIncluded as $key => $arrElement) {
-
-      $strModName = str_replace('tl_', '', $key);
-      switch ($strModName) {
-        case 'article':
-        case 'news':
-          $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName][0];
-          break;
-
-        case 'calendar_events':
-          $strModName = $GLOBALS['TL_LANG']['MOD']['calendar'][0];
-          break;
-
-        case 'layout':
-          $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName];
-          break;
-
-        default:
-          # code...
-          break;
+    if($arrIncluded) {
+      $sortArray = array();
+      if($arrIncluded['tl_layout']) {
+        $sortArray[] = 'tl_layout';
       }
-
-      // headline
-      $return .= '<div class="tl_show module_usage module_usage_'.$key.'">
-      <h3>'.$strModName.'</h3><table class="tl_show">';
-
-      // rows
-      $count = 0;
-      foreach ($arrElement as $value) {
-        $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
-
-        $return .= '
-        <tr>
-          <td'.$class.'>'.$value.'</td>
-        </tr>';
+      if($arrIncluded['tl_article']) {
+        $sortArray[] = 'tl_article';
       }
+      if($arrIncluded['tl_news']) {
+        $sortArray[] = 'tl_news';
+      }
+      if($arrIncluded['tl_calendar_events']) {
+        $sortArray[] = 'tl_calendar_events';
+      }
+      $arrIncluded = array_merge(array_flip($sortArray), $arrIncluded);
 
-      $return .= '</table></div>';
+
+      // build containers
+      foreach ($arrIncluded as $key => $arrElement) {
+
+        $strModName = str_replace('tl_', '', $key);
+        switch ($strModName) {
+          case 'article':
+          case 'news':
+            $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName][0];
+            break;
+
+          case 'calendar_events':
+            $strModName = $GLOBALS['TL_LANG']['MOD']['calendar'][0];
+            break;
+
+          case 'layout':
+            $strModName = $GLOBALS['TL_LANG']['MOD'][$strModName];
+            break;
+
+          default:
+            # code...
+            break;
+        }
+
+        // headline
+        $return .= '<div class="tl_show module_usage module_usage_'.$key.'">
+        <h3>'.$strModName.'</h3><table class="tl_show">';
+
+        // rows
+        $count = 0;
+        foreach ($arrElement as $value) {
+          $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
+
+          $return .= '
+          <tr>
+            <td'.$class.'>'.$value.'</td>
+          </tr>';
+        }
+
+        $return .= '</table></div>';
+      }
     }
+    else {
+      $return .= '<div class="tl_show"><h3 style="color: #589b0e;">'.$GLOBALS['TL_LANG']['MSC']['module_usage']['module_not_used'].'</h3>';
+      $return .= '<p style="margin: 1em 0; font-style: italic;">'.$GLOBALS['TL_LANG']['MSC']['module_usage']['module_not_used_tip'].'</p></div>';
+    }
+
+
 
     // return HTML table
     return $return;
