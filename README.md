@@ -8,12 +8,12 @@ Each feature can be activated in the user settings.
 ## Features included
 * Quick link to install tool
 * Show IDs in list view for selected types
+* Show where modules are used
 
 ## Further ideas
 If you have any ideas that you want to be added let me know.
 
 **Possible features to be added**
-* Show where modules are used
 
 
 ## Show IDs - supported types
