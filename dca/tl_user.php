@@ -23,7 +23,7 @@ foreach ($GLOBALS['TL_DCA']['tl_user']['palettes'] as $k => $palette) {
   if (!is_array($palette) && strpos($palette, "useCE")!==false) {
     $GLOBALS['TL_DCA']['tl_user']['palettes'][$k] = str_replace (
       'useCE',
-      'useCE;{backendhelper_legend:hide},useQuickLink,showListingIDs',
+      'useCE;{backendhelper_legend:hide},useQuickLink,showModuleUsage,showListingIDs',
       $GLOBALS['TL_DCA']['tl_user']['palettes'][$k]
     );
   }
@@ -35,7 +35,16 @@ $GLOBALS['TL_DCA']['tl_user']['fields']['useQuickLink'] = array (
   'default'                 => 0,
   'exclude'                 => true,
   'inputType'               => 'checkbox',
-  'eval'                    => array('tl_class'=>'w50'),
+  'eval'                    => array('tl_class'=>'cbx w50'),
+  'sql'                     => "char(1) NOT NULL default ''"
+);
+
+$GLOBALS['TL_DCA']['tl_user']['fields']['showModuleUsage'] = array (
+  'label'                   => &$GLOBALS['TL_LANG']['tl_user']['showModuleUsage'],
+  'default'                 => 0,
+  'exclude'                 => true,
+  'inputType'               => 'checkbox',
+  'eval'                    => array('tl_class'=>'cbx w50'),
   'sql'                     => "char(1) NOT NULL default ''"
 );
 

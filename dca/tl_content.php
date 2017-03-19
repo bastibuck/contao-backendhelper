@@ -14,5 +14,5 @@ $objUser = BackendUser::getInstance();
 // show ID for pages in listing
 if ($objUser->showListingIDs && in_array('tl_content', $objUser->showListingIDs)) {
   // manipulate listing to show ID
-  $GLOBALS['TL_DCA']['tl_content']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\ShowIDs', 'listContentWithID');
+  $GLOBALS['TL_DCA']['tl_content']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\BackendUtils', 'listContentWithID');
 }

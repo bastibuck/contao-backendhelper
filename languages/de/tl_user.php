@@ -12,4 +12,5 @@ $GLOBALS['TL_LANG']['tl_user']['backendhelper_legend'] = 'Backend-Helper Einstel
 
 // Fields
 $GLOBALS['TL_LANG']['tl_user']['useQuickLink'] = array('QuickLink zum Install-Tool', 'Aktivieren Sie den Quick-Link zum Install-Tool in der Header-Bar des Backends.');
+$GLOBALS['TL_LANG']['tl_user']['showModuleUsage'] = array('Modulverwendung anzeigen', 'Aktivieren Sie die Anzeige von Moduleinbindungen.');
 $GLOBALS['TL_LANG']['tl_user']['showListingIDs'] = array('Zeige IDs in Listenansicht', 'Aktiviert die Ausgabe von IDs in Listenansichten für die ausgewählten Bereiche.');

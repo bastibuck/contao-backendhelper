@@ -11,8 +11,10 @@
 namespace Bastibuck\BackendHelper\Resources\Backend;
 
 use Contao\Backend;
+use Contao\Input;
+use Contao\Database;
 
-class ShowIDs extends Backend {
+class BackendUtils extends Backend {
 
   /**
 	 * List a content element including it's ID
@@ -176,5 +178,51 @@ class ShowIDs extends Backend {
     $strNewOutput = str_replace ($needle, $replace, $haystack);
 
     return $strNewOutput;
+  }
+
+
+
+  /**
+ 	 * Return all non-excluded fields of a record as HTML table
+ 	 *
+ 	 * @return string
+ 	 */
+ 	public function showUsage()
+ 	{
+    $arrRows = array();
+    $count = 0;
+
+    // module ID
+    $id = Input::get('id');
+
+    // get module
+    $objModule = Database::getInstance()
+      ->prepare('SELECT * FROM tl_module WHERE id=?')
+      ->execute($id);
+
+    $arrRows['type'] = $GLOBALS['TL_LANG']['FMD'][$objModule->type][0];
+    $arrRows['name'] = $objModule->name;
+
+    foreach ($arrRows as $key => $value) {
+
+      // create colored rows
+      $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
+
+      $return .= '
+      <tr>
+        <td'.$class.'>
+          <span class="tl_label">
+            '.$GLOBALS['TL_LANG']['tl_module'][$key][0].'
+          </span>
+        </td>
+        <td'.$class.'>'.$value.'</td>
+      </tr>';
+    }
+
+    // return HTML table
+    return '
+      <table class="tl_show">
+        '.$return.'
+      </table>';
   }
 }

@@ -14,5 +14,5 @@ $objUser = BackendUser::getInstance();
 // show ID for pages in listing
 if ($objUser->showListingIDs && in_array('tl_news', $objUser->showListingIDs)) {
   // manipulate listing to show ID
-  $GLOBALS['TL_DCA']['tl_news']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\ShowIDs', 'listNewsArticlesWithIDs');
+  $GLOBALS['TL_DCA']['tl_news']['list']['sorting']['child_record_callback'] = array('Bastibuck\BackendHelper\Resources\Backend\BackendUtils', 'listNewsArticlesWithIDs');
 }
