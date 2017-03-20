@@ -195,7 +195,7 @@ class BackendUtils extends Backend {
     // init
     $return = '';
     $strParentChildSeparator = ' » ';
-    $backendPath = \Environment::get('url').'/contao';
+    $backendPath = '/contao/main.php';
 
     // build info header
     $id = Input::get('id'); // module ID
@@ -242,7 +242,7 @@ class BackendUtils extends Backend {
 
       foreach($arrModules as $module) {
         if ($module['mod'] == $id) {
-          $arrIncluded['tl_layout'][] = '<a href="/contao/main.php?do=themes&table=tl_layout&id='.$objLayouts->id.'&act=edit&popup=1&rt='.REQUEST_TOKEN.'">'.$objLayouts->name.'</a>';
+          $arrIncluded['tl_layout'][] = '<a href="'.$backendPath.'?do=themes&table=tl_layout&id='.$objLayouts->id.'&act=edit&popup=1&rt='.REQUEST_TOKEN.'">'.$objLayouts->name.'</a>';
         }
       }
     }
