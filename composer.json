@@ -1,6 +1,6 @@
 {
     "name": "bastibuck/contao-backendhelper",
-    "type": "contao-bundle",
+    "type": "contao-module",
     "description": "Contao Open Source CMS extension Backend Helper",
     "keywords": ["contao", "backend", "helper", "backendhelper"],
     "license": "LGPL-3.0+",
