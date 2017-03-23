@@ -44,7 +44,7 @@ class Hooks {
 
             $strURL = \Environment::get('url').'/contao';
 
-            $strHTML = '<span class="header_quicklink_container"><a href="'.$strURL.'/install.php" class="header_install" title="'.$strLinkTitle.'">'.$strLinkText.'</a></span>';
+            $strHTML = '<span class="header_quicklink_container"><a href="'.$strURL.'/install.php" class="header_install" title="'.$strLinkTitle.'" target="_blank">'.$strLinkText.'</a></span>';
             $strContent = str_replace($strFind, $strFind.$strHTML, $strContent);
           }
         }
