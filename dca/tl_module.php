@@ -21,17 +21,19 @@ if ($objUser->showListingIDs && in_array('tl_module', $objUser->showListingIDs))
 // show where modules are used
 if ($objUser->showModuleUsage) {
 
-  $fileType = '.svg';
   if(version_compare(VERSION, '4.0', '<=')) // contao 3.5
   {
-    $fileType = '.gif';
+    $fileIcon = 'system/modules/contao-backendhelper/assets/modules_info.gif';
+  }
+  else {
+    $fileType = 'diff.svg';    
   }
 
   $GLOBALS['TL_DCA']['tl_module']['list']['operations']['showUsage'] = array
   (
     'label'               => &$GLOBALS['TL_LANG']['tl_module']['showUsage'],
     'href'                => 'key=showUsage&amp;popup=1',
-    'icon'                => 'diff'.$fileType,
+    'icon'                => $fileType,
     'attributes'          => 'onclick="Backend.openModalIframe({\'width\':768,\'title\':\''.$GLOBALS['TL_LANG']['tl_module']['showUsage'][0].'\',\'url\':this.href});return false";'
   );
 }

@@ -209,27 +209,11 @@ class BackendUtils extends Backend {
     $arrInfoRow['type'] = $GLOBALS['TL_LANG']['FMD'][$objModule->type][0];
     $arrInfoRow['name'] = $objModule->name;
 
-
-    $return .= '<div class="tl_show module_usage module_usage_header">
-                  <table class="tl_show">';
-
-    $count = 0;
-    foreach ($arrInfoRow as $key => $value) {
-      // create colored rows
-      $class = (($count++ % 2) == 0) ? ' class="tl_bg"' : '';
-
-      $return .= '
-      <tr>
-        <td'.$class.'>
-          <span class="tl_label">
-            '.$GLOBALS['TL_LANG']['tl_module'][$key][0].'
-          </span>
-        </td>
-        <td'.$class.'>'.$value.'</td>
-      </tr>';
-    }
-
-    $return .= '</table></div>';
+    $return .= '<div class="tl_show module_usage_headline">
+                  <h1>
+                    '.$GLOBALS['TL_LANG']['MSC']['module_usage']['headline'].' '.$objModule->name.' <span style="color:#999;padding-left:3px; font-weight: 300;">['.$GLOBALS['TL_LANG']['FMD'][$objModule->type][0].']</span>
+                  </h1>
+                </div>';
 
 
     // look for includes in layouts
@@ -364,8 +348,8 @@ class BackendUtils extends Backend {
         }
 
         // headline
-        $return .= '<div class="tl_show module_usage module_usage_'.$key.'">
-        <h3>'.$strModName.'</h3><table class="tl_show">';
+        $return .= '<div class="module_usage module_usage_'.$key.'">
+        <table class="tl_show"><tr><th>'.$strModName.'</th></tr>';
 
         // rows
         $count = 0;
