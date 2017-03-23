@@ -211,7 +211,7 @@ class BackendUtils extends Backend {
 
     $return .= '<div class="tl_show module_usage_headline">
                   <h1>
-                    '.$GLOBALS['TL_LANG']['MSC']['module_usage']['headline'].' '.$objModule->name.' <span style="color:#999;padding-left:3px; font-weight: 300;">['.$GLOBALS['TL_LANG']['FMD'][$objModule->type][0].']</span>
+                    '.$objModule->name.' <span style="color:#999;padding-left:3px; font-weight: 300;">['.$GLOBALS['TL_LANG']['FMD'][$objModule->type][0].']</span>
                   </h1>
                 </div>';
 
