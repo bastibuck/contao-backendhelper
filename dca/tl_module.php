@@ -26,14 +26,14 @@ if ($objUser->showModuleUsage) {
     $fileIcon = 'system/modules/contao-backendhelper/assets/modules_info.gif';
   }
   else {
-    $fileType = 'diff.svg';    
+    $fileIcon = 'diff.svg';
   }
 
   $GLOBALS['TL_DCA']['tl_module']['list']['operations']['showUsage'] = array
   (
     'label'               => &$GLOBALS['TL_LANG']['tl_module']['showUsage'],
     'href'                => 'key=showUsage&amp;popup=1',
-    'icon'                => $fileType,
+    'icon'                => $fileIcon,
     'attributes'          => 'onclick="Backend.openModalIframe({\'width\':768,\'title\':\''.$GLOBALS['TL_LANG']['tl_module']['showUsage'][0].'\',\'url\':this.href});return false";'
   );
 }
