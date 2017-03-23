@@ -197,6 +197,11 @@ class BackendUtils extends Backend {
     $strParentChildSeparator = ' » ';
     $backendPath = '/contao/main.php';
 
+    // add version to container
+    $strClassVersion = 'c'.str_replace('.', '', VERSION);
+    $strClassVersion = substr($strClassVersion, 0, 2);
+
+
     // build info header
     $id = Input::get('id'); // module ID
     $arrInfoRow = array();
@@ -209,7 +214,8 @@ class BackendUtils extends Backend {
     $arrInfoRow['type'] = $GLOBALS['TL_LANG']['FMD'][$objModule->type][0];
     $arrInfoRow['name'] = $objModule->name;
 
-    $return .= '<div class="tl_show module_usage_headline">
+
+    $return .= '<div class="'.$strClassVersion.'"><div class="tl_show module_usage_headline">
                   <h1>
                     '.$objModule->name.' <span style="color:#999;padding-left:3px; font-weight: 300;">['.$GLOBALS['TL_LANG']['FMD'][$objModule->type][0].']</span>
                   </h1>
@@ -370,7 +376,7 @@ class BackendUtils extends Backend {
       $return .= '<p style="margin: 1em 0; font-style: italic;">'.$GLOBALS['TL_LANG']['MSC']['module_usage']['module_not_used_tip'].'</p></div>';
     }
 
-
+    $return .= '</div>';
 
     // return HTML table
     return $return;

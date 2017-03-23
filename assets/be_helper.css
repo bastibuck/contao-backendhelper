@@ -25,3 +25,7 @@
 .module_usage .tl_show th {
   padding: 12px 6px;
 }
+
+.c3 .module_usage .tl_show th {
+  padding: 12px 0;
+}
