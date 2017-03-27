@@ -15,6 +15,9 @@
         "contao/core-bundle": "~3.5 || ~4.1",
         "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
     },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
     "autoload": {
         "classmap":[""]
     },
@@ -23,6 +26,7 @@
   			"sources":{
   				"":"system/modules/contao-backendhelper"
   			}
-  		}
+  		},
+      "contao-manager-plugin": "Bastibuck\\BackendHelper\\Resources\\ContaoManager\\Plugin"
   	}
 }
