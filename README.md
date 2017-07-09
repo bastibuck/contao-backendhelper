@@ -2,6 +2,11 @@
 
 Tiny extension for Contao CMS (3.5 or ^4.1) that provides several useful backend helpers.
 
+[![Latest Stable Version](https://poser.pugx.org/bastibuck/contao-backendhelper/v/stable)](https://packagist.org/packages/bastibuck/contao-backendhelper)
+[![Total Downloads](https://poser.pugx.org/bastibuck/contao-backendhelper/downloads)](https://packagist.org/packages/bastibuck/contao-backendhelper)
+[![License](https://poser.pugx.org/bastibuck/contao-backendhelper/license)](https://packagist.org/packages/bastibuck/contao-backendhelper)
+
+
 ## Usage
 Each feature can be activated in the user settings.
 
