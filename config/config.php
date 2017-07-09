@@ -19,7 +19,7 @@ $GLOBALS['BE_MOD']['design']['themes']['showUsage'] = array('Bastibuck\BackendHe
 if (TL_MODE == 'BE') {
   if(version_compare(VERSION, '4.0', '<=')) // contao 3.5
   {
-    $GLOBALS['TL_CSS'][] = "system/modules/contao-backendhelper/assets/be_helper.css";
+    $GLOBALS['TL_CSS'][] = "system/modules/backendhelper/assets/be_helper.css";
   }
   else {
     $GLOBALS['TL_CSS'][] = "bundles/backendhelper/be_helper.css";

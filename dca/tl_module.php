@@ -23,7 +23,7 @@ if ($objUser->showModuleUsage) {
 
   if(version_compare(VERSION, '4.0', '<=')) // contao 3.5
   {
-    $fileIcon = 'system/modules/contao-backendhelper/assets/modules_info.gif';
+    $fileIcon = 'system/modules/backendhelper/assets/modules_info.gif';
   }
   else {
     $fileIcon = 'diff.svg';
