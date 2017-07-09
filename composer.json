@@ -1,32 +1,36 @@
 {
     "name": "bastibuck/contao-backendhelper",
     "type": "contao-module",
-    "description": "Contao Open Source CMS extension Backend Helper",
+    "description": "Backend Helper extension for Contao Open Source CMS",
     "keywords": ["contao", "backend", "helper", "backendhelper"],
+    "homepage": "https://github.com/bastibuck/contao-backendhelper",
     "license": "LGPL-3.0+",
     "authors":[
         {
-            "name":"Basti Buck",
-            "homepage":"http://www.bastibuck.de"
+          "name": "Basti Buck",
+          "email": "mail@bastibuck.de",
+          "homepage": "http://bastibuck.de",
+          "role": "Developer"
         }
     ],
+    "support": {
+      "issues": "https://github.com/bastibuck/contao-backendhelper/issues"
+    },
     "require": {
         "php": ">=5.4.0",
         "contao/core-bundle": "~3.5 || ~4.1",
         "contao-community-alliance/composer-plugin": "~2.4 || ~3.0"
     },
-    "require-dev": {
-        "contao/manager-plugin": "^2.0"
-    },
     "autoload": {
-        "classmap":[""]
+        "classmap": [
+          ""
+        ]
     },
-  	"extra":{
-  		"contao":{
-  			"sources":{
-  				"":"system/modules/contao-backendhelper"
-  			}
-  		},
-      "contao-manager-plugin": "Bastibuck\\BackendHelper\\Resources\\ContaoManager\\Plugin"
-  	}
+    "extra":{
+      "contao":{
+        "sources":{
+          "":"system/modules/backendhelper"
+        }
+      }
+    }
 }
