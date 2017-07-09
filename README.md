@@ -15,6 +15,9 @@ Each feature can be activated in the user settings.
 * Show IDs in list view for selected types
 * Show where modules are used
 
+## Screenshots
+[![Install Tool Quick link](../screens/install_tool_header.png)]
+
 ## Further ideas
 If you have any ideas that you want to be added let me know.
 
